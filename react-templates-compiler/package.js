@@ -1,13 +1,15 @@
 Package.describe({
     name: 'lassombra:react-templates-compiler',
-    version: '0.0.4',
+    version: '0.0.5',
     summary: 'Compiler plugin that converts *.rt files to be used by react components.',
-    documentation: 'README.md'
+    documentation: 'README.md',
+    git: 'https://github.com/lassombra/react-templates'
 });
 
 Npm.depends({'react-templates':'0.1.20'});
 
 Package.onUse(function (api) {
+    api.versionsFrom('1.2.0');
     api.addFiles('compiler.js', 'server');
     api.export('ReactCompiler', 'server');
 });
