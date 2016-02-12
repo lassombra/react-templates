@@ -9,7 +9,7 @@ Package.describe({
 Npm.depends({'react-templates':'0.1.20'});
 
 Package.onUse(function (api) {
-    api.versionsFrom('1.2.0');
+    api.versionsFrom('1.2.1');
     api.addFiles('compiler.js', 'server');
     api.export('ReactCompiler', 'server');
 });

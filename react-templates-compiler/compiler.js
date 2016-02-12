@@ -16,10 +16,16 @@ Compiler.prototype.processFilesForTarget = function(files) {
     files.forEach(function (file) {
         var contents = file.getContentsAsString();
         var displayName = file.getDisplayPath();
-        var name = getFunctionName(displayName, contents);
-        var compiled = createIIFE(contents, name);
+        var compiled = this.processFile(displayName, contents);
         file.addJavaScript({data: compiled, path: file.getPathInPackage() + '.js'});
     });
+};
+/**
+ * Returns a string containing the compiled output (instead of passing it through to meteor automatically.
+ */
+Compiler.prototype.processFile = function(displayName, contents) {
+    var name = getFunctionName(displayName, contents);
+    return createIIFE(contents, name);
 };
 
 /**
@@ -75,8 +81,6 @@ function getFunctionName(displayName, contents) {
  * The work horse.  This actually creates the javascript code which will close on React and underscore
  * to create a render function.  The render function may have inline helper functions which are defined
  * by the compiler.
- *
- * TODO: Optimize the compiler to not use inline helpers but rather have a helper runtime.
  *
  * @param contents {string} the contents of the .rt file to convert into an IIFE returning a React render function
  * @param name {string} the name of the render function to be returned by the IIFE.
