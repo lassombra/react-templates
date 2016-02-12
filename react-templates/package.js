@@ -13,7 +13,7 @@ Package.registerBuildPlugin({
 });
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.2.0');
+  api.versionsFrom('1.2.1');
   api.use('isobuild:compiler-plugin@1.0.0');
   api.use('underscore@1.0.4');
   api.use('react-runtime@0.14.4');
@@ -23,5 +23,7 @@ Package.onUse(function (api) {
 });
 
 Package.onTest(function (api) {
-  api.use(["tinytest", "underscore"]);
+  api.use(["tinytest", "underscore", "ecmascript"]);
+  api.use('lassombra:react-templates');
+  api.addFiles('runtime-tests.js')
 });
