@@ -16,7 +16,8 @@ Compiler.prototype.processFilesForTarget = function(files) {
     files.forEach(function (file) {
         var contents = file.getContentsAsString();
         var displayName = file.getDisplayPath();
-        var compiled = this.processFile(displayName, contents);
+        var name = getFunctionName(displayName, contents);
+        var compiled = createIIFE(contents, name);
         file.addJavaScript({data: compiled, path: file.getPathInPackage() + '.js'});
     });
 };
